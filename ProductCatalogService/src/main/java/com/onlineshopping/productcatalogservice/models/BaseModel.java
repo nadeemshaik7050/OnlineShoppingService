@@ -1,11 +1,11 @@
 package com.onlineshopping.productcatalogservice.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 public class BaseModel {
     private Long id;
     private String title;
+
 }

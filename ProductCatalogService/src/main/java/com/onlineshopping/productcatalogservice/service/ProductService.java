@@ -1,15 +1,17 @@
 package com.onlineshopping.productcatalogservice.service;
 
+import com.onlineshopping.productcatalogservice.Exceptions.ProductNotFoundException;
+import com.onlineshopping.productcatalogservice.models.Product;
+
 import java.util.List;
 
 public interface ProductService {
-    String getProductById(Long id);
+    Product getProductById(Long id) throws ProductNotFoundException;
 
-    List<String> getProductAllProducts();
+    List<Product> getAllProducts();
 
     String deleteProductById(Long id);
 
-    String addProduct();
+    Product addProduct(Product product);
 
-    String addProduct(Long prodId);
 }

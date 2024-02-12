@@ -1,18 +1,19 @@
 package com.onlineshopping.productcatalogservice.service;
 
 
+import com.onlineshopping.productcatalogservice.models.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service("SelfProductService")
 public class ProductServiceImpl implements ProductService{
     @Override
-    public String getProductById(Long id) {
-        return "Product from Service Class "+id.toString();
+    public Product getProductById(Long id) {
+        return null;
     }
 
     @Override
-    public List<String> getProductAllProducts() {
+    public List<Product> getAllProducts() {
         return null;
     }
 
@@ -22,14 +23,10 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public String addProduct() {
-        return null;
+    public Product addProduct(Product product) {
+        return product;
     }
 
-    @Override
-    public String addProduct(Long prodId) {
-        return null;
-    }
 }
 
 
