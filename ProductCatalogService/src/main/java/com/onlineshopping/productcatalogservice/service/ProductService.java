@@ -10,7 +10,7 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    String deleteProductById(Long id);
+    Product deleteProductById(Long id);
 
     Product addProduct(Product product);
 
