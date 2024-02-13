@@ -45,6 +45,11 @@ public class FakeProductService implements ProductService {
         return getProductFromFakeStoreDto(fakeStoreClient.addProduct(getDTOFromProduct(product)));
     }
 
+    @Override
+    public Product updateProduct(Long id) {
+        return getProductFromFakeStoreDto(fakeStoreClient.updateProduct(id));
+    }
+
 
     public Product getProductFromFakeStoreDto(FakeStoreProductDto fakeStoreProductDto) {
         Category category = Category.builder().build();

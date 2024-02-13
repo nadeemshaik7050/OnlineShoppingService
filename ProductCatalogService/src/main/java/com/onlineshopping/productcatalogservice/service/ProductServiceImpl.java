@@ -27,6 +27,11 @@ public class ProductServiceImpl implements ProductService{
         return product;
     }
 
+    @Override
+    public Product updateProduct(Long id) {
+        return null;
+    }
+
 }
 
 
