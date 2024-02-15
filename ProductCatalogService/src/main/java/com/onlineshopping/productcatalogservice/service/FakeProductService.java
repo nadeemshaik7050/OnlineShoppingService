@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service("FakeStoreProductService")
 public class FakeProductService implements ProductService {
@@ -59,7 +60,7 @@ public class FakeProductService implements ProductService {
                 .price(fakeStoreProductDto.getPrice())
                 .category(category)
                 .build();
-        product.setId(fakeStoreProductDto.getId());
+        product.setId(new UUID(fakeStoreProductDto.getId(),0L));
         product.setTitle(fakeStoreProductDto.getTitle());
         return product;
     }
