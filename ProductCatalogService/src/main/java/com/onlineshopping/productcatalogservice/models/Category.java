@@ -1,11 +1,12 @@
 package com.onlineshopping.productcatalogservice.models;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import lombok.*;
 
 @Getter
 @Setter
+@Entity
+@RequiredArgsConstructor
 @Builder
 public class Category extends BaseModel {
 
