@@ -60,7 +60,7 @@ public class FakeProductService implements ProductService {
                 .price(fakeStoreProductDto.getPrice())
                 .category(category)
                 .build();
-        product.setId(new UUID(fakeStoreProductDto.getId(),0L));
+        product.setId(fakeStoreProductDto.getId());
         product.setTitle(fakeStoreProductDto.getTitle());
         return product;
     }
