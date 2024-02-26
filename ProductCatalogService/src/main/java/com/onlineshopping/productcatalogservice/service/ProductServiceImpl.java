@@ -58,8 +58,19 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product updateProduct(Long id) {
-        return null;
+    public Product updateProduct(Long id,Product product) {
+        Optional<Product> productOptional=productRepo.findById(id);
+        if(productOptional.isPresent()){
+            Product product1=productOptional.get();
+            product1.setCategory(product.getCategory());
+            product1.setDescription(product.getDescription());
+            product1.setPrice(product.getPrice());
+            product1.setTitle(product.getTitle());
+            productRepo.save(product1);
+            return product1;
+        }else{
+            return null;
+        }
     }
 
 }

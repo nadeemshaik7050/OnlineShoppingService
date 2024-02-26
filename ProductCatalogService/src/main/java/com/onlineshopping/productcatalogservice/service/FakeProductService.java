@@ -47,8 +47,8 @@ public class FakeProductService implements ProductService {
     }
 
     @Override
-    public Product updateProduct(Long id) {
-        return getProductFromFakeStoreDto(fakeStoreClient.updateProduct(id));
+    public Product updateProduct(Long id,Product product) {
+        return fakeStoreClient.updateProduct(id,product);
     }
 
 

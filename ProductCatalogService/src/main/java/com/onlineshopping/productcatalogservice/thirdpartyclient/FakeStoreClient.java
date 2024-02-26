@@ -2,15 +2,17 @@ package com.onlineshopping.productcatalogservice.thirdpartyclient;
 
 import com.onlineshopping.productcatalogservice.Exceptions.ProductNotFoundException;
 import com.onlineshopping.productcatalogservice.dtos.FakeStoreProductDto;
+import com.onlineshopping.productcatalogservice.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpMessageConverterExtractor;
 import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
+
 
 @Component
 public class FakeStoreClient {
@@ -64,11 +66,15 @@ public class FakeStoreClient {
         return entity.getBody();
     }
 
-    public FakeStoreProductDto updateProduct(Long id) {
+    public Product updateProduct(Long id, Product product){
         RestTemplate restTemplate = restTemplateBuilder.build();
-        RequestCallback requestCallback = restTemplate.acceptHeaderRequestCallback(FakeStoreProductDto.class);
-        ResponseExtractor<ResponseEntity<FakeStoreProductDto>> responseExtractor = restTemplate.responseEntityExtractor(FakeStoreProductDto.class);
-        ResponseEntity<FakeStoreProductDto> entity = restTemplate.execute(getProdUrl, HttpMethod.PUT, requestCallback, responseExtractor, id);
-        return entity.getBody();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Product> request = new HttpEntity<>(product, headers);
+        RequestCallback requestCallback = restTemplate.httpEntityCallback(product, Product.class);
+        HttpMessageConverterExtractor<Product> responseExtractor =
+                new HttpMessageConverterExtractor<>(Product.class, restTemplate.getMessageConverters());
+        Product response = restTemplate.execute(getProdUrl, HttpMethod.PUT, requestCallback, responseExtractor, id);
+        return response;
     }
 }
