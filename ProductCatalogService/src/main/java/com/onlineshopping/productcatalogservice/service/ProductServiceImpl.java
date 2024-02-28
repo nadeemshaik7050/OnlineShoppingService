@@ -6,12 +6,14 @@ import com.onlineshopping.productcatalogservice.models.Category;
 import com.onlineshopping.productcatalogservice.models.Product;
 import com.onlineshopping.productcatalogservice.repositories.CategoryRepo;
 import com.onlineshopping.productcatalogservice.repositories.ProductRepo;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service("SelfProductService")
+@Primary
 public class ProductServiceImpl implements ProductService{
 
     private ProductRepo productRepo;
