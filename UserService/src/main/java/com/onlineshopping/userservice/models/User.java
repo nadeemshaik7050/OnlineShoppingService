@@ -2,14 +2,16 @@ package com.onlineshopping.userservice.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class User extends BaseModel{
     private String username;
     private String hashedPassword;
