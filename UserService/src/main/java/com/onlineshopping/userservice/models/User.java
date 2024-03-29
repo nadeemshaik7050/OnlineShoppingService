@@ -1,6 +1,7 @@
 package com.onlineshopping.userservice.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import lombok.*;
 
@@ -17,7 +18,7 @@ public class User extends BaseModel{
     private String hashedPassword;
     private String email;
     private boolean isEmailVerified;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
 }

@@ -24,13 +24,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
     private final TokenRepo tokenRepo;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepo userRepo, TokenRepo tokenRepo, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    public UserServiceImpl(UserRepo userRepo, TokenRepo tokenRepo) {
         this.userRepo = userRepo;
         this.tokenRepo = tokenRepo;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
