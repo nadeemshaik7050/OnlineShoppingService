@@ -1,16 +1,13 @@
 package com.onlineshopping.userservice.models;
 
 import jakarta.persistence.Entity;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 @Entity
 @Getter
 @Setter
-@Builder
+@NoArgsConstructor
 public class Role extends BaseModel{
     private String name;
 }
