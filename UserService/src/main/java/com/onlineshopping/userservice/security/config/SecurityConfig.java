@@ -87,6 +87,7 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/users/signup").permitAll()
                         .anyRequest().authenticated()
                 )
