@@ -7,6 +7,7 @@ import com.onlineshopping.productcatalogservice.models.Product;
 import com.onlineshopping.productcatalogservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("SelfProductService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -40,10 +41,16 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-    @GetMapping("/")
+    @GetMapping("/allproducts")
     public List<Product> getProductAllProducts() {
         List<Product> list = productService.getAllProducts();
         return list;
+    }
+
+    @GetMapping("/")
+    public Page<Product> getProductAllProductsWithPaginationandSorting(@RequestParam int pageNum, @RequestParam int size, @RequestParam String sortBy,@RequestParam String sortOrder) {
+        Page<Product> page = productService.getAllProducts(pageNum, size, sortBy,sortOrder);
+        return page;
     }
 
     @DeleteMapping("/{id}")

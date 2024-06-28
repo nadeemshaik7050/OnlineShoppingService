@@ -6,6 +6,7 @@ import com.onlineshopping.productcatalogservice.models.Category;
 import com.onlineshopping.productcatalogservice.models.Product;
 import com.onlineshopping.productcatalogservice.thirdpartyclient.FakeStoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -49,6 +50,11 @@ public class FakeProductService implements ProductService {
     @Override
     public Product updateProduct(Long id,Product product) {
         return fakeStoreClient.updateProduct(id,product);
+    }
+
+    @Override
+    public Page<Product> getAllProducts(int pageNum, int size,String sortBy,String sortOrder) {
+        return null;
     }
 
 

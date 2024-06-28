@@ -7,13 +7,17 @@ import com.onlineshopping.productcatalogservice.models.Product;
 import com.onlineshopping.productcatalogservice.repositories.CategoryRepo;
 import com.onlineshopping.productcatalogservice.repositories.ProductRepo;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service("SelfProductService")
-@Primary
+//@Primary
 public class ProductServiceImpl implements ProductService{
 
     private ProductRepo productRepo;
@@ -73,6 +77,19 @@ public class ProductServiceImpl implements ProductService{
         }else{
             return null;
         }
+    }
+
+    @Override
+    public Page<Product> getAllProducts(int pageNum, int size,String sortBy,String sortOrder) {
+        Sort sort;
+        if(sortOrder.equalsIgnoreCase("asc"))
+            sort=Sort.by(sortBy).ascending();
+        else
+            sort=Sort.by(sortBy).descending();
+
+        Pageable pageRequest=PageRequest.of(pageNum,size,sort);
+        Page<Product> page= productRepo.findAll(pageRequest);
+        return page;
     }
 
     //TODO: Implement 2 category apis

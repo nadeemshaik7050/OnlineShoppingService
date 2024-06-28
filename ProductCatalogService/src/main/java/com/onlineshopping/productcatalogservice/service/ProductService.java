@@ -2,6 +2,8 @@ package com.onlineshopping.productcatalogservice.service;
 
 import com.onlineshopping.productcatalogservice.Exceptions.ProductNotFoundException;
 import com.onlineshopping.productcatalogservice.models.Product;
+import org.springframework.data.domain.Page;
+
 
 import java.util.List;
 
@@ -15,5 +17,7 @@ public interface ProductService {
     Product addProduct(Product product);
 
     Product updateProduct(Long id, Product product);
+
+    Page<Product> getAllProducts(int pageNum, int size,String sortBy,String sortOrder);
 
 }
