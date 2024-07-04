@@ -32,7 +32,7 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    public ProductController(@Qualifier("SelfProductService") ProductService productService) {
+    public ProductController(@Qualifier("FakeStoreProductService") ProductService productService) {
         this.productService = productService;
     }
 
