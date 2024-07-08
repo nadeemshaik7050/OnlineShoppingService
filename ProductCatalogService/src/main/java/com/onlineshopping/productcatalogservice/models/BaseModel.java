@@ -11,7 +11,6 @@ import java.util.UUID;
 public class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //TODO: change to UUID
     private Long id;
     private String title;
 

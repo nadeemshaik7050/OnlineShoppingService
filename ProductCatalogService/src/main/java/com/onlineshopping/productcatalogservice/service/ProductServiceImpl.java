@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("SelfProductService")
-//@Primary
+@Primary
 public class ProductServiceImpl implements ProductService{
 
     private ProductRepo productRepo;
@@ -91,8 +91,6 @@ public class ProductServiceImpl implements ProductService{
         Page<Product> page= productRepo.findAll(pageRequest);
         return page;
     }
-
-    //TODO: Implement 2 category apis
 }
 
 
