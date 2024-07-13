@@ -18,7 +18,7 @@ public class SpringSecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/actuator/**").permitAll()
-                        .requestMatchers("/products/").hasAuthority("ADMIN")
+                        .requestMatchers("/products/{id}").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
