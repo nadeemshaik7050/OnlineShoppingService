@@ -15,8 +15,9 @@ public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String productname;
+    private String productName;
     private int quantity;
     private Long amount;
-    private int discountinpercentage;
+    @Column(name = "discount_in_percentage")
+    private int discountInPercentage;
 }
