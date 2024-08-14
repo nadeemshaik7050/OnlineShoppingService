@@ -37,8 +37,8 @@ public class OrderService {
 
         OrderDetails orderDetails =OrderDetails.builder()
                 .amount(amount)
-                .discountinpercentage(orderDetailsRequestDto.getDiscountinPercentage())
-                .productname(productDto.getDescription())
+                .discountInPercentage(orderDetailsRequestDto.getDiscountinPercentage())
+                .productName(productDto.getDescription())
                 .quantity(orderDetailsRequestDto.getQuantity())
                 .build();
         return orderRepo.save(orderDetails).getId();
