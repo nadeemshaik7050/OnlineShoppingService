@@ -1,11 +1,13 @@
 package com.onlineshoppingservice.paymentservice.services;
 
 import com.onlineshoppingservice.paymentservice.dtos.OrderDetailsDto;
+import com.onlineshoppingservice.paymentservice.dtos.PaymentGatewayResponseDto;
 import com.onlineshoppingservice.paymentservice.model.PaymentDetails;
 import com.onlineshoppingservice.paymentservice.repository.PaymentRepository;
 import com.onlineshoppingservice.paymentservice.services.paymentgateway.PaymentGateway;
 import com.onlineshoppingservice.paymentservice.stratergies.PaymentGatewayChooseStratergy;
 import com.razorpay.RazorpayException;
+import com.stripe.exception.StripeException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,10 +25,11 @@ public class PaymentService {
         this.paymentRepository = paymentRepository;
     }
 
-    public String initiatePayment(String orderId, String email, String phnum) throws RazorpayException {
+    public String initiatePayment(String orderId, String email, String phnum) throws RazorpayException, StripeException {
         OrderDetailsDto orderDetailsDto = orderService.getOrderDetails(orderId);
         PaymentGateway paymentGateway = paymentGatewayChooseStratergy.choosePaymentGateway();
-        String paymentUrl= paymentGateway.generatePaymentLink(orderDetailsDto, email, phnum);
+        String paymentGatewayName = paymentGateway.getClass().getSimpleName();
+        PaymentGatewayResponseDto paymentGatewayResponseDto = paymentGateway.generatePaymentLink(orderDetailsDto, email, phnum);
 
         PaymentDetails paymentDetails = PaymentDetails.builder()
                 .orderId(orderDetailsDto.getId())
@@ -34,13 +37,16 @@ public class PaymentService {
                 .productName(orderDetailsDto.getProductName())
                 .quantity(orderDetailsDto.getQuantity())
                 .discountInPercentage(orderDetailsDto.getDiscountInPercentage())
-                .paymentUrl(paymentUrl)
+                .paymentUrl(paymentGatewayResponseDto.getPaymentLink())
                 .email(email)
                 .phNum(phnum)
+                .paymentStatus(paymentGatewayResponseDto.getPaymentStatus())
+                .paymentGateway(paymentGatewayName)
+                .paymentIdInGateway(paymentGatewayResponseDto.getPaymentId())
                 .build();
 
         paymentRepository.save(paymentDetails);
 
-        return  paymentUrl;
+        return  paymentGatewayResponseDto.getPaymentLink();
     }
 }

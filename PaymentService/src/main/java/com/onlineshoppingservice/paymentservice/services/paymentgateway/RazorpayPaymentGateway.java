@@ -1,6 +1,8 @@
 package com.onlineshoppingservice.paymentservice.services.paymentgateway;
 
 import com.onlineshoppingservice.paymentservice.dtos.OrderDetailsDto;
+import com.onlineshoppingservice.paymentservice.dtos.PaymentGatewayResponseDto;
+import com.onlineshoppingservice.paymentservice.model.PaymentStatus;
 import com.razorpay.PaymentLink;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
@@ -19,7 +21,7 @@ public class RazorpayPaymentGateway implements PaymentGateway {
     }
 
     @Override
-    public String generatePaymentLink(OrderDetailsDto orderDetailsDto,String email,String phNum) throws RazorpayException {
+    public PaymentGatewayResponseDto generatePaymentLink(OrderDetailsDto orderDetailsDto, String email, String phNum) throws RazorpayException {
 
         //Creating Payment Link
         JSONObject paymentLinkRequest = new JSONObject();
@@ -46,7 +48,13 @@ public class RazorpayPaymentGateway implements PaymentGateway {
         paymentLinkRequest.put("callback_method", "get");
 
         PaymentLink payment = razorpayClient.paymentLink.create(paymentLinkRequest);
-        return payment.get("short_url").toString();
+
+        //return payment.get("short_url").toString();
+        return PaymentGatewayResponseDto.builder()
+                .paymentLink(payment.get("short_url").toString())
+                .paymentId(payment.get("id").toString())
+                .paymentStatus(PaymentStatus.PENDING.toString())
+                .build();
     }
 
 

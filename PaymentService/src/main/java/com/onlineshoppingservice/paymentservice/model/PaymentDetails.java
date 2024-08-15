@@ -23,4 +23,7 @@ public class PaymentDetails {
     private String paymentUrl;
     private String email;
     private String phNum;
+    private String paymentStatus;
+    private String paymentGateway;
+    private String paymentIdInGateway;
 }

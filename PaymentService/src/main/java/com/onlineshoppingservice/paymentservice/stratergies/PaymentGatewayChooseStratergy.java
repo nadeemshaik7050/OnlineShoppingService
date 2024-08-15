@@ -6,6 +6,8 @@ import com.onlineshoppingservice.paymentservice.services.paymentgateway.StripePa
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 @Service
 public class PaymentGatewayChooseStratergy {
 
@@ -18,11 +20,11 @@ public class PaymentGatewayChooseStratergy {
     }
 
     public PaymentGateway choosePaymentGateway() {
-       /*
+
         int random = new Random().nextInt();
         if (random % 2 == 0) {
             return stripePaymentGateway;
-        }*/
+        }
         return razorpayPaymentGateway;
     }
 
