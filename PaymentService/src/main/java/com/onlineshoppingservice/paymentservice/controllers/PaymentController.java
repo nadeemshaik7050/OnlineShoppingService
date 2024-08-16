@@ -1,5 +1,6 @@
 package com.onlineshoppingservice.paymentservice.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.onlineshoppingservice.paymentservice.dtos.PaymentRequestDto;
 import com.onlineshoppingservice.paymentservice.services.PaymentService;
 import com.razorpay.RazorpayException;
@@ -17,7 +18,7 @@ public class PaymentController {
     }
 
     @PostMapping("/createPaymentLink")
-    public String initiatePayment(@RequestBody PaymentRequestDto request) throws RazorpayException, StripeException {
+    public String initiatePayment(@RequestBody PaymentRequestDto request) throws RazorpayException, StripeException, JsonProcessingException {
         return paymentService.initiatePayment(request.getOrderId(), request.getEmail(), request.getPhnum());
     }
 }
