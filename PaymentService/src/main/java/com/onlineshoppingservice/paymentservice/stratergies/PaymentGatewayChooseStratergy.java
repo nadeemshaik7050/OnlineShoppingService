@@ -21,11 +21,10 @@ public class PaymentGatewayChooseStratergy {
 
     public PaymentGateway choosePaymentGateway() {
 
-//        int random = new Random().nextInt();
-//        if (random % 2 == 0) {
-//            return stripePaymentGateway;
-//        }
-        //return stripePaymentGateway;
+        int random = new Random().nextInt();
+        if (random % 2 == 0) {
+            return stripePaymentGateway;
+        }
         return razorpayPaymentGateway;
     }
 

@@ -69,7 +69,7 @@ public class PaymentService {
 
         kafkaTemplate.send(Constants.Email, objectMapper.writeValueAsString(emailDto));
 
-        //kafkaTemplate.send(Constants.SMS, objectMapper.writeValueAsString(smsDto));
+        kafkaTemplate.send(Constants.SMS, objectMapper.writeValueAsString(smsDto));
 
         return  paymentGatewayResponseDto.getPaymentLink();
     }
